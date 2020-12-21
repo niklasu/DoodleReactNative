@@ -29,8 +29,7 @@ export function LoginScreen({navigation}) {
       <Button
         title="login"
         onPress={() => {
-          navigation.navigate('Details', {userId: selectedValue});
-          console.log(`login as ${selectedValue}`);
+          navigation.navigate('Profile', {userId: selectedValue});
         }}
       />
 
