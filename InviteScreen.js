@@ -38,6 +38,33 @@ export function InviteScreen({route}) {
     return item.state;
   }
 
+  function submit(answerEnum) {
+    let nummer = 0;
+    if (answerEnum === 'ACCEPTED') {
+      nummer = 0;
+    }
+    if (answerEnum === 'REJECTED') {
+      nummer = 1;
+    }
+    fetch(
+      `http://${serverIp}:3000/api/appointments/${selectedAppointment}/answers`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          participantId: userId,
+          answer: nummer,
+        }),
+      },
+    )
+      .then((response) => response.json())
+      .then((r) => console.log(r))
+      .catch((error) => console.log(error));
+  }
+
   return (
     <>
       <FlatList
@@ -46,7 +73,7 @@ export function InviteScreen({route}) {
           <ListItem
             key={item.id}
             bottomDivider
-            onPress={(a) => {
+            onPress={() => {
               setSelectedAppointment(item.id);
               setModalVisible(true);
             }}>
@@ -72,6 +99,7 @@ export function InviteScreen({route}) {
             <TouchableHighlight
               style={{...styles.openButton, backgroundColor: '#4DBC15'}}
               onPress={() => {
+                submit('ACCEPTED');
                 setModalVisible(!modalVisible);
               }}>
               <Text style={styles.textStyle}>Accept</Text>
@@ -83,6 +111,7 @@ export function InviteScreen({route}) {
                 marginTop: 20,
               }}
               onPress={() => {
+                submit('REJECTED');
                 setModalVisible(!modalVisible);
               }}>
               <Text style={styles.textStyle}>Decline</Text>
