@@ -16,15 +16,13 @@ export function InviteScreen({route}) {
     fetchData();
   }, [userId]);
 
-  function getText(item) {
-    return <Text style={{margin: 10, fontSize: 30}}>{item.name}</Text>;
-  }
-
   return (
     <>
       <FlatList
         data={appointments}
-        renderItem={({item}) => getText(item)}
+        renderItem={({item}) => (
+          <Text style={{margin: 10, fontSize: 30}}>{item.name}</Text>
+        )}
         keyExtractor={(item) => item.id}
       />
     </>

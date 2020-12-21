@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {InviteScreen} from './InviteScreen';
 import {LoginScreen} from './LoginScreen';
 import {ProfileScreen} from './ProfileScreen';
+import {CreateAppointment} from './CreateAppointment';
 
 export const serverIp = '10.0.2.2';
 
@@ -29,6 +30,11 @@ function App() {
           name="Profile"
           component={ProfileScreen}
           options={{title: 'My Profile'}}
+        />
+        <Stack.Screen
+          name="CreateAppointment"
+          component={CreateAppointment}
+          options={{title: 'New Appointment'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
