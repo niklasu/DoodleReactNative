@@ -12,8 +12,8 @@ import {TextInput, Button, View} from 'react-native';
 
 const serverIp = '10.0.2.2';
 const App: () => React$Node = () => {
-  console.log('uuuupdating');
   const [users, setUsers] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(undefined);
   useEffect(() => {
     const fetchData = () => {
       fetch(`http://${serverIp}:3000/api/users`)
@@ -28,11 +28,20 @@ const App: () => React$Node = () => {
 
   return (
     <>
-      <Picker>
+      <Picker
+        selectedValue={selectedValue}
+        onValueChange={(itemValue) => setSelectedValue(itemValue)}>
         {users.map((i) => (
-          <Picker.Item key={i.id} label={i.name} value="java" />
+          <Picker.Item key={i.id} label={i.name} value={i.id} />
         ))}
       </Picker>
+      <Button
+        title="login"
+        onPress={() => {
+          console.log(`login as ${selectedValue}`);
+        }}
+      />
+
       <TextInput
         style={{
           marginHorizontal: 10,
